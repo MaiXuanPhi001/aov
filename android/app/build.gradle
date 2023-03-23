@@ -89,6 +89,8 @@ def reactNativeArchitectures() {
 }
 
 android {
+    compileSdkVersion 27 // camera picker
+    buildToolsVersion "27.0.3" // camera picker
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -100,6 +102,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true // camera picker
+        targetSdkVersion 27 // camera picker
     }
 
     splits {
