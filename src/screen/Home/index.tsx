@@ -21,8 +21,8 @@ const Home = () => {
         <Slider />
         <Marquee />
         <Games />
-        {/* <Amount />
-        <RankWithdraw /> */}
+        <Amount />
+        <RankWithdraw />
       </Scroll>
     </Safe>
   )
