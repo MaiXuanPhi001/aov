@@ -16,19 +16,19 @@ import routes from '@util/routes'
 import React, { useState } from 'react'
 import { Alert } from 'react-native'
 
+const BORDER = 30
+
 const Form = () => {
     const dispatch = useAppDispatch()
 
     const navigation = useNavigation<any>()
 
-    const [email, setEmail] = useState<string>('')
-    const [password, setPassword] = useState<string>('')
+    const [email, setEmail] = useState<string>('test@gmail.com')
+    const [password, setPassword] = useState<string>('123123')
     const [security, setSecurity] = useState<boolean>(true)
     const [checkForm, setCheckForm] = useState<boolean>(false)
 
     const loading = useAppSelector(loadingUserSelector)
-
-    const BORDER = 30
 
     const handlerLogin = async () => {
         if (email.trim() === '' || password.trim() === '') {

@@ -60,6 +60,8 @@ const styles = StyleSheet.create({
         padding: 20,
         justifyContent: 'space-around',
         flexDirection: 'row',
+        backgroundColor: 'white',
+        borderRadius: 10,
         ...styled.shadow,
     }
 })

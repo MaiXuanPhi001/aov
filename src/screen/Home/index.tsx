@@ -1,13 +1,13 @@
-import React from 'react'
-import HeaderApp from '@reuse/HeaderApp'
-import ForegroundHome from '@reuse/ForegroundHome'
-import Slider from './Slider'
-import Marquee from '@reuse/Marquee'
-import Games from './Games'
-import Safe from '@reuse/Safe'
 import Scroll from '@commom/Scroll'
+import ForegroundHome from '@reuse/ForegroundHome'
+import HeaderApp from '@reuse/HeaderApp'
+import Marquee from '@reuse/Marquee'
+import Safe from '@reuse/Safe'
+import React from 'react'
 import Amount from './Amount'
+import Games from './Games'
 import RankWithdraw from './RankWithdraw'
+import Slider from './Slider'
 
 const Home = () => {
   return (

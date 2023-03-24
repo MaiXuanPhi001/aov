@@ -60,6 +60,7 @@ export const theme = {
     grayTab: '#f5f5f5',
     red_oclock: '#FF0000',
     purple: '#db5fd1',
+    purple2: '#5b4f96',
     yellowInfo: '#fffbe6',
     big: '#ffc04a',
     small: '#61adff',

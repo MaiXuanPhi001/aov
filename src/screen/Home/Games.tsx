@@ -9,8 +9,8 @@ import K3Lotre from './K3Lotre'
 const Games = () => {
   return (
     <Box marginTop={30}>
-        <WinGO />
         <Aov />
+        <WinGO />
         <VietNamLottery />
         <FiveDLotre />
         <K3Lotre />

@@ -84,9 +84,6 @@ export const styled = StyleSheet.create({
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
         elevation: 6,
-        // marginBottom={20}
-        // backgroundColor={'white'}
-        // radius={BORDER}
         marginBottom: 20,
         backgroundColor: 'white',
         borderRadius: 10,

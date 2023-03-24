@@ -1,9 +1,12 @@
-import { ImageBackground, StyleSheet } from 'react-native'
-import React from 'react'
 import Box from '@commom/Box'
-import Txt from '@commom/Txt'
 import Btn from '@commom/Btn'
+import Img from '@commom/Img'
+import Txt from '@commom/Txt'
+import { navigate } from '@navigation/navigationRef'
 import { styled } from '@theme/styled'
+import routes from '@util/routes'
+import React from 'react'
+import { ImageBackground, StyleSheet } from 'react-native'
 
 const Aov = () => {
     return (
@@ -22,8 +25,9 @@ const Aov = () => {
                 >
                     Xổ số Liên Quân Mobile, Thắng Bại Tại Kĩ Năng
                 </Txt>
-                {/* <Btn
-                    backgroundColor={'#5c5093'}
+                <Btn
+                    onPress={() => navigate(routes.Aov)}
+                    backgroundColor={'#2b1d75'}
                     row
                     paddingVertical={10}
                     width={120}
@@ -35,12 +39,6 @@ const Aov = () => {
                         width={25}
                         height={25}
                     />
-                </Btn> */}
-                <Btn
-                    disabled={true}
-                    style={styled.comingSoonButton}
-                >
-                    <Txt color={'white'} bold size={16}>Coming soon</Txt>
                 </Btn>
             </ImageBackground>
         </Box>

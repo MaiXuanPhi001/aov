@@ -15,6 +15,7 @@ const routes = {
     CSKH: 'CSKH',
     HISTORY_DEPOSIT_VND: 'HistoryDepositVnd',
     Win_Go: 'WinGo',
+    Aov: 'Aov',
     WITHDRAW_VND: 'WithdrawVND',
     WITHDRAW_VND_HISTORY: 'WithdrawVNDHistory',
     DEPOSIT_VND: 'DepositVND',
