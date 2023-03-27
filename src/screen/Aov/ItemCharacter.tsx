@@ -8,17 +8,19 @@ const IMG = width * 13.5 / 100
 
 interface Props {
     character: Character,
+    onOpenBottomSheet: Function,
 }
 
-const ItemCharacter: React.FC<Props> = ({ character }) => {
+const ItemCharacter: React.FC<Props> = ({ character, onOpenBottomSheet }) => {
     return (
-        <Btn 
+        <Btn
+            onPress={() => onOpenBottomSheet({...character, type: 2})}
             width={BTN}
             height={BTN}
             backgroundColor={'white'}
             radius={50}
         >
-            <Img 
+            <Img
                 source={character.image}
                 width={IMG}
                 height={IMG}

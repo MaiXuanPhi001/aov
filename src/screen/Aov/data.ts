@@ -1,49 +1,65 @@
 import { ImageSourcePropType } from "react-native";
 
 export interface Character {
-    id: number;
+    order: number;
     image: ImageSourcePropType,
 }
 
 export const charaters: Character[] = [
     {
-        id: 0,
+        order: 0,
         image: require('@images/aov/nhanvat0.png'),
     },
     {
-        id: 1,
+        order: 1,
         image: require('@images/aov/nhanvat1.png'),
     },
     {
-        id: 2,
+        order: 2,
         image: require('@images/aov/nhanvat2.png'),
     },
     {
-        id: 3,
+        order: 3,
         image: require('@images/aov/nhanvat3.png'),
     },
     {
-        id: 4,
+        order: 4,
         image: require('@images/aov/nhanvat4.png'),
     },
     {
-        id: 5,
+        order: 5,
         image: require('@images/aov/nhanvat5.png'),
     },
     {
-        id: 6,
+        order: 6,
         image: require('@images/aov/nhanvat6.png'),
     },
     {
-        id: 7,
+        order: 7,
         image: require('@images/aov/nhanvat7.png'),
     },
     {
-        id: 8,
+        order: 8,
         image: require('@images/aov/nhanvat8.png'),
     },
     {
-        id: 9,
+        order: 9,
         image: require('@images/aov/nhanvat9.png'),
     },
 ]
+
+export const converNumberToImages = (number: number) => {
+    switch (number) {
+        case 0: return require('@images/aov/nhanvat0.png')
+        case 1: return require('@images/aov/nhanvat1.png')
+        case 2: return require('@images/aov/nhanvat2.png')
+        case 3: return require('@images/aov/nhanvat3.png')
+        case 4: return require('@images/aov/nhanvat4.png')
+        case 5: return require('@images/aov/nhanvat5.png')
+        case 6: return require('@images/aov/nhanvat6.png')
+        case 7: return require('@images/aov/nhanvat7.png')
+        case 8: return require('@images/aov/nhanvat8.png')
+        case 9: return require('@images/aov/nhanvat9.png')
+        default: return require('@images/aov/nhanvat0.png')
+    }
+}

@@ -2,15 +2,15 @@ import Box from '@commom/Box'
 import Txt from '@commom/Txt'
 import { useAppSelector } from '@hooks/index'
 import { minuteSecond } from '@method/date'
-import { gameHistoryWinGoSelector, timeLimitWinGoSelector, timeWinGoSelector } from '@selector/wingoSelector'
+import { gameHistoryAovSelector, timeAovSelector, timeLimitAovSelector } from '@selector/aovSelector'
 import React from 'react'
 import { ImageBackground, StyleSheet } from 'react-native'
 import Oclock from './Oclock'
 
 const Countdown = () => {
-    const timeLimit = useAppSelector(timeLimitWinGoSelector)
-    const time = useAppSelector(timeWinGoSelector)
-    const gameHistory = useAppSelector(gameHistoryWinGoSelector)
+    const timeLimit = useAppSelector(timeLimitAovSelector)
+    const time = useAppSelector(timeAovSelector)
+    const gameHistory = useAppSelector(gameHistoryAovSelector)
 
     const historyItem: { id: number } = gameHistory.data.slice(0, 1)[0]
 

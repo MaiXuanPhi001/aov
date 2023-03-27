@@ -23,7 +23,6 @@ const Pagination = ({
     onBack,
     marginTop = 20,
     alignSefl = 'flex-end',
-    color = theme.colors.textRed,
     borderColor = '#4B4E5B',
 }: Props) => {
     return (
@@ -45,24 +44,21 @@ const Pagination = ({
                 justifyCenter
                 radius={5}
             >
-                <Img
-                    width={15}
-                    height={15}
-                    source={require('@images/wingo/back-page.png')}
-                />
+                <Txt color={'white'}>{'<'}</Txt>
             </Btn>
 
             <Box
-                borderColor={color}
+                borderColor={'#090040'}
                 borderWidth={1}
                 height={32}
                 width={32}
                 alignCenter
                 justifyCenter
                 radius={5}
+                backgroundColor={'#eeeaff'}
                 marginHorizontal={2}
             >
-                <Txt color={color}>{indexPage}</Txt>
+                <Txt color={'#3e3182'}>{indexPage}</Txt>
             </Box>
 
             <Btn
@@ -77,11 +73,7 @@ const Pagination = ({
                 justifyCenter
                 radius={5}
             >
-                <Img
-                    width={15}
-                    height={15}
-                    source={require('@images/wingo/next-page.png')}
-                />
+              <Txt color={'white'} bold>{'>'}</Txt>
             </Btn>
         </Box>
     )

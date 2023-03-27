@@ -1,31 +1,60 @@
+import { orderAovThunk } from '@asyncThunk/aovAsyncThunk';
+import { getProfileThunk } from '@asyncThunk/userAsyncThunk';
+import { historyOrderThunk } from '@asyncThunk/winGoAsyncThunk';
 import Box from '@commom/Box';
-import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useRef } from 'react';
+import { useAppDispatch } from '@hooks/index';
+import { Order } from '@interface/winGo';
+import aovSlice from '@slice/aovSlice';
+import React, { useRef } from 'react';
+import { ImageSourcePropType } from 'react-native';
 import Balance from './Balance';
-import Container from './Container';
-import Marquee from './Marquee';
-import TabBar from './TabBar';
-import { styles } from '@navigation/TabNavigator'
-import TimeLimit from './TimeLimit';
-import Countdown from './Countdown';
 import Characters from './Characters';
+import Container from './Container';
+import Countdown from './Countdown';
+import Marquee from './Marquee';
+import Statistical from './Statistical';
+import TabBar from './TabBar';
+import TimeLimit from './TimeLimit';
+
+type Data = {
+  image: ImageSourcePropType,
+  order: string,
+  type: number,
+}
 
 const Aov = () => {
-  const navigation = useNavigation()
+  const dispatch = useAppDispatch()
+
   const toastTopRef = useRef<any>(null)
   const bottomSheetRef = useRef<any>(null)
 
-  useEffect(() => {
-    navigation.getParent()?.setOptions({ tabBarStyle: { display: 'none' } })
-    return () => {
-      navigation.getParent()?.setOptions({ tabBarStyle: styles.container })
-    }
-  }, [])
+  const handleOpenBottomSheet = (data: Data) => {
+    dispatch(aovSlice.actions.order({
+      order: data.order,
+      type: data.type,
+      image: data.image,
+    }))
+    bottomSheetRef?.current?.open()
+  }
+
+  const handleOrder = async (order: Order) => {
+    const { payload } = await dispatch(orderAovThunk(order))
+
+    toastTopRef.current.slideDown(payload.message, payload.status)
+    bottomSheetRef.current.close()
+    await dispatch(historyOrderThunk({
+      time: order.time,
+      limit: 10,
+      page: 1,
+    }))
+    await dispatch(getProfileThunk())
+  }
 
   return (
     <Container
       toastTopRef={toastTopRef}
       bottomSheetRef={bottomSheetRef}
+      onOrder={handleOrder}
     >
       <TabBar />
       <Box paddingHorizontal={10}>
@@ -33,7 +62,11 @@ const Aov = () => {
         <Marquee />
         <TimeLimit />
         <Countdown />
-        <Characters />
+        <Characters
+          onOpenBottomSheet={handleOpenBottomSheet}
+          bottomSheetRef={bottomSheetRef}
+        />
+        <Statistical />
       </Box>
     </Container>
   )

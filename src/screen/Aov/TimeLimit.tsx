@@ -2,8 +2,8 @@ import { getProfileThunk } from '@asyncThunk/userAsyncThunk'
 import { getChartLoteryThunk, historyOrderThunk } from '@asyncThunk/winGoAsyncThunk'
 import Box from '@commom/Box'
 import { useAppDispatch, useAppSelector } from '@hooks/index'
-import { historyOrderWinGoSelector, timeLimitWinGoSelector, timeTypeWinGoSelector } from '@selector/wingoSelector'
-import wingoSlice from '@slice/wingoSlice'
+import { historyOrderAovSelector, timeLimitAovSelector, timeTypeAovSelector } from '@selector/aovSelector'
+import aovSlice from '@slice/aovSlice'
 import { theme } from '@theme/index'
 import contants from '@util/contants'
 import React, { useEffect } from 'react'
@@ -20,9 +20,9 @@ type Time = {
 const TimeLimit = () => {
     const dispatch = useAppDispatch()
 
-    const timeLimit = useAppSelector(timeLimitWinGoSelector)
-    const timeType = useAppSelector(timeTypeWinGoSelector)
-    const historyOrder = useAppSelector(historyOrderWinGoSelector)
+    const timeLimit = useAppSelector(timeLimitAovSelector)
+    const timeType = useAppSelector(timeTypeAovSelector)
+    const historyOrder = useAppSelector(historyOrderAovSelector)
 
     const times: Time[] = [
         {
@@ -44,7 +44,7 @@ const TimeLimit = () => {
     ]
 
     const handleChangeTimeLimit = async (time: Time) => {
-        dispatch(wingoSlice.actions.setTimeLimit(time))
+        dispatch(aovSlice.actions.setTimeLimit(time))
 
         await dispatch(
             historyOrderThunk({
@@ -59,7 +59,7 @@ const TimeLimit = () => {
         const newSocket = io(contants.HOSTING)
         newSocket.on(timeType, second => {
             const time = (timeLimit * 60) - second
-            dispatch(wingoSlice.actions.setTime(time))
+            dispatch(aovSlice.actions.setTime(time))
 
             if (time === (timeLimit * 60 - 1)) {
                 handleReloadStatistical()

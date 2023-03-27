@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
+import aovSlice from "@slice/aovSlice"
 import depositSlice from "@slice/depositSlice"
 import marketingSlice from "@slice/marketingSlice"
 import userSlice from "@slice/userSlice"
@@ -8,6 +9,7 @@ import withdrawSlice from "@slice/withdrawSlice"
 export const store = configureStore({
     reducer: {
         user: userSlice.reducer,
+        aov: aovSlice.reducer,
         wingo: wingoSlice.reducer,
         withdraw: withdrawSlice.reducer,
         deposite: depositSlice.reducer,

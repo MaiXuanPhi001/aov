@@ -61,6 +61,7 @@ export const theme = {
     red_oclock: '#FF0000',
     purple: '#db5fd1',
     purple2: '#5b4f96',
+    purpleOrder: '#2b1d75',
     yellowInfo: '#fffbe6',
     big: '#ffc04a',
     small: '#61adff',

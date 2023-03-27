@@ -3,16 +3,28 @@ import Btn from '@commom/Btn'
 import Txt from '@commom/Txt'
 import { useAppSelector } from '@hooks/index'
 import { minuteSecond } from '@method/date'
-import { timeWinGoSelector } from '@selector/wingoSelector'
+import { timeAovSelector } from '@selector/aovSelector'
 import { width } from '@util/responsive'
 import React from 'react'
-import { ImageBackground, StyleSheet, Text } from 'react-native'
+import { ImageBackground, Keyboard, StyleSheet, Text } from 'react-native'
 import { Character, charaters } from './data'
 import ItemCharacter from './ItemCharacter'
 
-const Characters = () => {
-    const time = useAppSelector(timeWinGoSelector)
+type Props = {
+    onOpenBottomSheet: Function,
+    bottomSheetRef: React.MutableRefObject<any>,
+}
+
+const Characters = ({ onOpenBottomSheet, bottomSheetRef }: Props) => {
+    const time = useAppSelector(timeAovSelector)
     const oclock = minuteSecond(time)
+
+    if (time === 4) {
+        if (bottomSheetRef?.current) {
+            bottomSheetRef.current.close()
+            Keyboard.dismiss()
+        }
+    }
 
     return (
         <ImageBackground
@@ -24,8 +36,9 @@ const Characters = () => {
                 <Box row justifySpaceAround alignCenter marginTop={20}>
                     {charaters.slice(0, 5).map((character: Character) =>
                         <ItemCharacter
-                            key={character.id}
+                            key={character.order}
                             character={character}
+                            onOpenBottomSheet={onOpenBottomSheet}
                         />
                     )}
                 </Box>
@@ -33,15 +46,21 @@ const Characters = () => {
                 <Box row justifySpaceAround alignCenter marginTop={15}>
                     {charaters.slice(5, 10).map((character: Character) =>
                         <ItemCharacter
-                            key={character.id}
+                            key={character.order}
                             character={character}
+                            onOpenBottomSheet={onOpenBottomSheet}
                         />
                     )}
                 </Box>
             </Box>
 
             <Box row justifySpaceBetween alignCenter marginTop={20} marginBottom={40}>
-                <Btn>
+                <Btn onPress={() => onOpenBottomSheet({
+                    type: 3,
+                    order: 'big',
+                    image: require('@images/aov/imgSPP.png'),
+                })}
+                >
                     <ImageBackground
                         source={require('@images/aov/bg-adsp.png')}
                         resizeMode='stretch'
@@ -51,7 +70,12 @@ const Characters = () => {
                     </ImageBackground>
                 </Btn>
 
-                <Btn>
+                <Btn onPress={() => onOpenBottomSheet({
+                    type: 3,
+                    order: 'small',
+                    image: require('@images/aov/imgADD.png'),
+                })}
+                >
                     <ImageBackground
                         source={require('@images/aov/bg-adsp.png')}
                         resizeMode='stretch'
@@ -63,7 +87,7 @@ const Characters = () => {
             </Box>
 
             {/* 4 giây đếm ngược */}
-            {time != 4 &&
+            {time <= 4 &&
                 <>
                     <Box style={styles.oclockContainer} />
                     <Box style={styles.oclockContent}>
