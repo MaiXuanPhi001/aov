@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
-import HeaderApp from '@reuse/HeaderApp'
-import KeyBoardSafe from '@reuse/KeyBoardSafe'
-import Txt from '@commom/Txt'
-import { theme } from '@theme/index'
-import Input from '@commom/Input'
 import Box from '@commom/Box'
 import Btn from '@commom/Btn'
+import Input from '@commom/Input'
+import Txt from '@commom/Txt'
+import { goBack } from '@navigation/navigationRef'
+import BackHome from '@reuse/BackHome'
+import KeyBoardSafe from '@reuse/KeyBoardSafe'
 import LoadingWhite from '@reuse/LoadingWhite'
 import TextError from '@reuse/TextError'
 import { sendmailforgetpassword } from '@service/userService'
-import { Alert } from 'react-native'
-import routes from '@util/routes'
+import { theme } from '@theme/index'
 import { styled } from '@theme/styled'
+import routes from '@util/routes'
+import React, { useState } from 'react'
+import { Alert } from 'react-native'
 
 const ForgotPassword = ({ navigation }: any) => {
   const [email, setEmail] = useState<string>('')
@@ -29,7 +30,7 @@ const ForgotPassword = ({ navigation }: any) => {
 
   return (
     <KeyBoardSafe>
-      <HeaderApp />
+      <BackHome onBack={() => goBack()} />
       <Box
         paddingHorizontal={20}
         alignCenter

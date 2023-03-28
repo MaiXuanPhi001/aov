@@ -1,9 +1,9 @@
-import { orderAovThunk } from '@asyncThunk/aovAsyncThunk';
+import { historyOrderAovThunk, orderAovThunk } from '@asyncThunk/aovAsyncThunk';
 import { getProfileThunk } from '@asyncThunk/userAsyncThunk';
-import { historyOrderThunk } from '@asyncThunk/winGoAsyncThunk';
 import Box from '@commom/Box';
 import { useAppDispatch } from '@hooks/index';
 import { Order } from '@interface/winGo';
+import BackHeader from '@reuse/BackHeader';
 import aovSlice from '@slice/aovSlice';
 import React, { useRef } from 'react';
 import { ImageSourcePropType } from 'react-native';
@@ -13,7 +13,6 @@ import Container from './Container';
 import Countdown from './Countdown';
 import Marquee from './Marquee';
 import Statistical from './Statistical';
-import TabBar from './TabBar';
 import TimeLimit from './TimeLimit';
 
 type Data = {
@@ -42,7 +41,7 @@ const Aov = () => {
 
     toastTopRef.current.slideDown(payload.message, payload.status)
     bottomSheetRef.current.close()
-    await dispatch(historyOrderThunk({
+    await dispatch(historyOrderAovThunk({
       time: order.time,
       limit: 10,
       page: 1,
@@ -56,7 +55,7 @@ const Aov = () => {
       bottomSheetRef={bottomSheetRef}
       onOrder={handleOrder}
     >
-      <TabBar />
+      <BackHeader />
       <Box paddingHorizontal={10}>
         <Balance />
         <Marquee />

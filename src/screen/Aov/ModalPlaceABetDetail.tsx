@@ -10,17 +10,21 @@ import { DataHistoryOrder } from '@interface/winGo'
 import Txt from '@commom/Txt'
 import { theme } from '@theme/index'
 import { Platform } from 'react-native'
-import { bet, leftColor, rightColor } from './method'
+import { historyOrderAovSelector } from '@selector/aovSelector'
+import aovSlice from '@slice/aovSlice'
+import Img from '@commom/Img'
+import { converOrderToImages } from './data'
+import { numberWithCommas } from '@method/format'
 
 
 const ModalPlaceABetDetail = () => {
     const dispatch = useDispatch()
 
-    const historyOrder = useAppSelector<any>(historyOrderWinGoSelector)
+    const historyOrder = useAppSelector<any>(historyOrderAovSelector)
     const detail: DataHistoryOrder = historyOrder.detail
 
     const handleCloseModal = () => {
-        dispatch(wingoSlice.actions.setShowModalDetail(false))
+        dispatch(aovSlice.actions.setShowModalDetail(false))
     }
 
     const status: string =
@@ -29,10 +33,8 @@ const ModalPlaceABetDetail = () => {
 
     const profit: string =
         detail.profit === null ? 'PENDING' :
-            detail.profit > 0 ? `+${detail.profit}` :
-                `-${detail.amount * detail.balance}`
-
-    const RADIUS = 50
+            detail.profit > 0 ? `+${numberWithCommas(detail.profit)}` :
+                `-${numberWithCommas(detail.amount * detail.balance)}`
 
     return (
         <Modality
@@ -41,11 +43,7 @@ const ModalPlaceABetDetail = () => {
             animation={'fade'}
             onPress={handleCloseModal}
         >
-            <Box
-                backgroundColor={'white'}
-                width={'90%'}
-                radius={5}
-            >
+            <Box backgroundColor={'white'} width={'90%'} radius={5} >
                 <PlaceABetDetailComponent
                     title='ID'
                     value={detail.id}
@@ -60,16 +58,18 @@ const ModalPlaceABetDetail = () => {
                 />
                 <PlaceABetDetailComponent
                     title='Số tiền mua'
-                    value={detail.balance}
+                    value={numberWithCommas(detail.balance)}
+                    qh={true}
                 />
                 <PlaceABetDetailComponent
                     title='Thuế'
                     value={(detail.amount * detail.balance) - (detail.amount * detail.balance * 98 / 100)}
-
+                    qh={true}
                 />
                 <PlaceABetDetailComponent
                     title='Số tiền sau thuế'
-                    value={detail.amount * detail.balance * 98 / 100}
+                    value={numberWithCommas(detail.amount * detail.balance * 98 / 100)}
+                    qh={true}
                 />
                 <Box
                     row
@@ -97,56 +97,25 @@ const ModalPlaceABetDetail = () => {
                         height={'100%'}
                         justifyCenter
                     >
-                        <Box
-                            width={'24%'}
-                            justifyCenter
-                            alignCenter
-                        >
-                            <Box
-                                width={35}
-                                height={35}
-                                row
-                                alignCenter
-                                justifyCenter
-                                backgroundColor={leftColor(detail.order)}
-                                radius={RADIUS}
-                                overflow={Platform.OS === 'android' ? false : true}
-                                style={{ transform: [{ rotate: '45deg' }] }}
-                            >
-                                <Box
-                                    width={'50%'}
-                                    height={'100%'}
-                                    backgroundColor={leftColor(detail.order)}
-                                    borderTopLeftRadius={RADIUS}
-                                    borderBottomLeftRadius={RADIUS}
-                                />
-                                <Box
-                                    width={'50%'}
-                                    height={'100%'}
-                                    backgroundColor={rightColor(detail.order)}
-                                    borderTopRightRadius={RADIUS}
-                                    borderBottomRightRadius={RADIUS}
-                                />
-                                <Box
-                                    absolute
-                                    style={{ transform: [{ rotate: '-45deg' }] }}
-                                >
-                                    <Txt color={'white'} bold size={12}>{bet(detail.order)}</Txt>
-                                </Box>
-                            </Box>
-                        </Box>
+                        <Img
+                            source={converOrderToImages(detail.order)}
+                            width={35}
+                            height={35}
+                        />
                     </Box>
                 </Box>
                 <PlaceABetDetailComponent
                     title={'Trạng thái'}
                     value={status}
                     bold
-                    color={status === 'THẮNG' ? '#008001' : status === 'THUA' ? theme.colors.textRed : 'black'} 
+                    color={status === 'THẮNG' ? '#008001' : status === 'THUA' ? theme.colors.textRed : 'black'}
                 />
                 <PlaceABetDetailComponent
                     title='Số tiền'
-                    color={status === 'THẮNG' ? '#008001' : status === 'THUA' ? theme.colors.textRed : 'black'} 
+                    color={status === 'THẮNG' ? '#008001' : status === 'THUA' ? theme.colors.textRed : 'black'}
                     value={profit}
+                    qh={true}
+                    bold
                 />
                 <PlaceABetDetailComponent
                     title='Thời gian'

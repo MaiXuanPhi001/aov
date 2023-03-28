@@ -1,4 +1,4 @@
-import { getAovLoteryThunk, orderAovThunk } from "@asyncThunk/aovAsyncThunk";
+import { getAovLoteryThunk, historyOrderAovThunk, orderAovThunk } from "@asyncThunk/aovAsyncThunk";
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import { ImageSourcePropType } from "react-native/types";
 
@@ -85,8 +85,17 @@ const aovSlice = createSlice({
                     state.gameHistory.indexPage = payload.page
                 }
             })
+            .addCase(historyOrderAovThunk.fulfilled, (state, { payload }) => {
+                state.loadingStatistical = false
+                if (payload.status) {
+                    state.historyOrder.data = payload.data.array
+                    state.historyOrder.total = payload.data.total
+                    state.historyOrder.indexPage = payload.page
+                }
+            })
             .addMatcher(isAnyOf(
                 getAovLoteryThunk.pending,
+                historyOrderAovThunk.pending,
             ), (state) => {
                 state.loadingStatistical = true
             })

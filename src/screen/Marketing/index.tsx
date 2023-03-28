@@ -9,6 +9,9 @@ import Tutorial from './Tutorial'
 import Overview from './Overview'
 import ToastTop from '@reuse/ToastTop'
 import CalendarBottomSheet from './CalendarBottomSheet'
+import BackHome from '@reuse/BackHome'
+import { navigate } from '@navigation/navigationRef'
+import routes from '@util/routes'
 
 export const TAB = {
   OVERVIEW: 'overview',
@@ -27,7 +30,7 @@ const Marketing = () => {
     <>
       <ToastTop ref={toastTopRef} />
       <KeyBoardSafe paddingBottom={80}>
-        <HeaderApp />
+        <BackHome onBack={() => navigate(routes.HOME)} />
         <HeaderTab
           tab={tab}
           setTab={setTab}

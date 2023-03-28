@@ -28,7 +28,7 @@ const Marquee = ({
         speaker.setNumberOfLoops(-1)
         speaker.play()
         return () => {
-            speaker.release()
+            speaker.pause()
         }
     }, [])
 

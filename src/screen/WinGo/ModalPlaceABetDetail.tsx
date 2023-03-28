@@ -11,7 +11,7 @@ import Txt from '@commom/Txt'
 import { theme } from '@theme/index'
 import { Platform } from 'react-native'
 import { bet, leftColor, rightColor } from './method'
-
+import { numberWithCommas } from '@method/format'
 
 const ModalPlaceABetDetail = () => {
     const dispatch = useDispatch()
@@ -29,8 +29,8 @@ const ModalPlaceABetDetail = () => {
 
     const profit: string =
         detail.profit === null ? 'PENDING' :
-            detail.profit > 0 ? `+${detail.profit}` :
-                `-${detail.amount * detail.balance}`
+            detail.profit > 0 ? `+${numberWithCommas(detail.profit)}` :
+                `-${numberWithCommas(detail.amount * detail.balance)}`
 
     const RADIUS = 50
 
@@ -60,16 +60,15 @@ const ModalPlaceABetDetail = () => {
                 />
                 <PlaceABetDetailComponent
                     title='Số tiền mua'
-                    value={detail.balance}
+                    value={numberWithCommas(detail.balance)}
                 />
                 <PlaceABetDetailComponent
                     title='Thuế'
                     value={(detail.amount * detail.balance) - (detail.amount * detail.balance * 98 / 100)}
-
                 />
                 <PlaceABetDetailComponent
                     title='Số tiền sau thuế'
-                    value={detail.amount * detail.balance * 98 / 100}
+                    value={numberWithCommas(detail.amount * detail.balance * 98 / 100)}
                 />
                 <Box
                     row
@@ -147,6 +146,7 @@ const ModalPlaceABetDetail = () => {
                     title='Số tiền'
                     color={status === 'THẮNG' ? '#008001' : status === 'THUA' ? theme.colors.textRed : 'black'} 
                     value={profit}
+                    bold
                 />
                 <PlaceABetDetailComponent
                     title='Thời gian'

@@ -10,7 +10,7 @@ import ItemGameHistory from './ItemGameHistory'
 type History = {
     id: number,
     number: number,
-    type: string,
+    type: number,
     color: string[],
 }
 

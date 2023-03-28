@@ -1,5 +1,4 @@
-import { getAovLoteryThunk } from '@asyncThunk/aovAsyncThunk'
-import { historyOrderThunk } from '@asyncThunk/winGoAsyncThunk'
+import { getAovLoteryThunk, historyOrderAovThunk } from '@asyncThunk/aovAsyncThunk'
 import Box from '@commom/Box'
 import Btn from '@commom/Btn'
 import Txt from '@commom/Txt'
@@ -8,9 +7,9 @@ import LoadingRed from '@reuse/LoadingRed'
 import { loadingStatisticalAovSelector, timeLimitAovSelector } from '@selector/aovSelector'
 import React, { useEffect, useState } from 'react'
 import { ImageBackground, StyleSheet } from 'react-native'
+import CharacterChart from './CharacterChart'
 import GameHistory from './GameHistory'
 import ModalPlaceABetDetail from './ModalPlaceABetDetail'
-import CharacterChart from './CharacterChart'
 import PlaceABetHistory from './PlaceABetHistory'
 
 const Statistical = () => {
@@ -34,10 +33,10 @@ const Statistical = () => {
         )
     }
 
-    const handleHistoryOrderThunk = async () => {
+    const handleHistoryOrderAovThunk = async () => {
         setTab(2)
         dispatch(
-            historyOrderThunk({
+            historyOrderAovThunk({
                 time: timeLimit,
                 limit: 10,
                 page: 1,
@@ -66,7 +65,7 @@ const Statistical = () => {
                 <ButtonTab
                     title='Lịch sử cược'
                     choose={tab === 2}
-                    onSetTab={handleHistoryOrderThunk}
+                    onSetTab={handleHistoryOrderAovThunk}
                 />
             </Box>
 

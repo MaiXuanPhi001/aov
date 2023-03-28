@@ -1,12 +1,13 @@
-import React from 'react'
-import KeyBoardSafe from '@reuse/KeyBoardSafe'
-import HeaderApp from '@reuse/HeaderApp'
+import { goBack } from '@navigation/navigationRef'
+import BackHome from '@reuse/BackHome'
 import Banner from '@reuse/Banner'
+import KeyBoardSafe from '@reuse/KeyBoardSafe'
+import React from 'react'
 import Form from './Form'
 
 const SignUp = () => (
   <KeyBoardSafe>
-    <HeaderApp />
+    <BackHome onBack={() => goBack()} />
     <Banner />
     <Form />
   </KeyBoardSafe>

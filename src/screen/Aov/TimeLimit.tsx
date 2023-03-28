@@ -1,5 +1,6 @@
+import { getAovLoteryThunk, historyOrderAovThunk } from '@asyncThunk/aovAsyncThunk'
 import { getProfileThunk } from '@asyncThunk/userAsyncThunk'
-import { getChartLoteryThunk, historyOrderThunk } from '@asyncThunk/winGoAsyncThunk'
+import { historyOrderThunk } from '@asyncThunk/winGoAsyncThunk'
 import Box from '@commom/Box'
 import { useAppDispatch, useAppSelector } from '@hooks/index'
 import { historyOrderAovSelector, timeLimitAovSelector, timeTypeAovSelector } from '@selector/aovSelector'
@@ -71,7 +72,7 @@ const TimeLimit = () => {
 
     const handleReloadStatistical = async () => {
         await dispatch(
-            getChartLoteryThunk({
+            getAovLoteryThunk({
                 time: timeLimit,
                 limit: 10,
                 page: 1,
@@ -79,18 +80,20 @@ const TimeLimit = () => {
         )
 
         await dispatch(
-            historyOrderThunk({
+            historyOrderAovThunk({
                 limit: 10,
                 time: timeLimit,
                 page: historyOrder.indexPage,
             })
         )
 
-        await dispatch(historyOrderThunk({
-            limit: 10,
-            time: timeLimit,
-            page: 1,
-        }))
+        await dispatch(
+            historyOrderAovThunk({
+                limit: 10,
+                time: timeLimit,
+                page: 1,
+            })
+        )
 
         await dispatch(getProfileThunk())
     }

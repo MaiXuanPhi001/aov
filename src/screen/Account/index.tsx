@@ -12,6 +12,9 @@ import Option from './Option'
 import { getProfileThunk } from '@asyncThunk/userAsyncThunk'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import BottomChangeName from './BottomChangeName'
+import BackHome from '@reuse/BackHome'
+import { navigate } from '@navigation/navigationRef'
+import routes from '@util/routes'
 
 const Account = ({ navigation }: any) => {
   const dispatch = useAppDispatch()
@@ -38,7 +41,7 @@ const Account = ({ navigation }: any) => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <KeyBoardSafe paddingBottom={120}>
-        <HeaderApp />
+        <BackHome onBack={() => navigate(routes.HOME)} />
         <ForegroundHome height={230} />
         <Box paddingHorizontal={10}>
           <User

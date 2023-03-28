@@ -1,24 +1,23 @@
-import React, { useState } from 'react'
+import { historyOrderAovThunk } from '@asyncThunk/aovAsyncThunk'
 import Box from '@commom/Box'
-import Txt from '@commom/Txt'
-import { theme } from '@theme/index'
-import ItemHistoryPlaceABet from './ItemHistoryPlaceABet'
 import { useAppDispatch, useAppSelector } from '@hooks/index'
-import { historyOrderWinGoSelector, timeLimitWinGoSelector } from '@selector/wingoSelector'
 import { DataHistoryOrder } from '@interface/winGo'
 import Pagination from '@reuse/Pagination'
-import { historyOrderThunk } from '@asyncThunk/winGoAsyncThunk'
+import { historyOrderAovSelector, timeLimitAovSelector } from '@selector/aovSelector'
+import aovSlice from '@slice/aovSlice'
 import wingoSlice from '@slice/wingoSlice'
+import React from 'react'
 import { Alert } from 'react-native'
+import ItemHistoryPlaceABet from './ItemHistoryPlaceABet'
 
 const PlaceABetHistory = () => {
     const dispatch = useAppDispatch()
 
-    const historyOrder = useAppSelector(historyOrderWinGoSelector)
-    const timeLimit = useAppSelector(timeLimitWinGoSelector)
+    const historyOrder = useAppSelector(historyOrderAovSelector)
+    const timeLimit = useAppSelector(timeLimitAovSelector)
 
-    const hanleChangePageHistoryOrder = async (page: number) => {
-        const { payload } = await dispatch(historyOrderThunk({
+    const hanleChangePageHistoryOrderAov = async (page: number) => {
+        const { payload } = await dispatch(historyOrderAovThunk({
             limit: 10,
             time: timeLimit,
             page,
@@ -27,12 +26,11 @@ const PlaceABetHistory = () => {
     }
 
     const handleShowModalDetail = (historyItem: DataHistoryOrder) => {
-        dispatch(wingoSlice.actions.setHistoryDetail(historyItem))
+        dispatch(aovSlice.actions.setHistoryDetail(historyItem))
     }
 
     return (
-        <Box>
-            <HeaderTable />
+        <Box backgroundColor={'white'} marginTop={10} radius={10}>
             {historyOrder.data.map((item: DataHistoryOrder) =>
                 <ItemHistoryPlaceABet
                     key={Math.random()}
@@ -40,57 +38,14 @@ const PlaceABetHistory = () => {
                     onShowModalDetail={handleShowModalDetail}
                 />
             )}
-            <Pagination
-                indexPage={historyOrder.indexPage}
-                total={historyOrder.total}
-                onBack={() => hanleChangePageHistoryOrder(historyOrder.indexPage - 1)}
-                onNext={() => hanleChangePageHistoryOrder(historyOrder.indexPage + 1)}
-            />
-        </Box>
-    )
-}
-
-const HeaderTable = () => {
-    return (
-        <Box
-            row
-            width={'100%'}
-            height={40}
-            backgroundColor={'#fafafa'}
-            marginTop={10}
-            alignCenter
-        >
-            <Box
-                alignCenter
-                justifyCenter
-                width={'34%'}
-                height={20}
-                borderRightWidth={1}
-                borderColor={theme.colors.gray3}
-            >
-                <Txt bold>Kỳ xổ</Txt>
+            <Box margin={10}>
+                <Pagination
+                    indexPage={historyOrder.indexPage}
+                    total={historyOrder.total}
+                    onBack={() => hanleChangePageHistoryOrderAov(historyOrder.indexPage - 1)}
+                    onNext={() => hanleChangePageHistoryOrderAov(historyOrder.indexPage + 1)}
+                />
             </Box>
-            <Box
-                alignCenter
-                justifyCenter
-                width={'24%'}
-                height={20}
-                borderRightWidth={1}
-                borderColor={theme.colors.gray3}
-            >
-                <Txt bold>Cược</Txt>
-            </Box>
-            <Box
-                alignCenter
-                justifyCenter
-                width={'27%'}
-                height={20}
-                borderRightWidth={1}
-                borderColor={theme.colors.gray3}
-            >
-                <Txt bold>Kết quả</Txt>
-            </Box>
-            <Box width={'15%'} />
         </Box>
     )
 }

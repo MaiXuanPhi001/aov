@@ -1,4 +1,4 @@
-import { Order, ReqGetChartLotery } from "@interface/winGo"
+import { Order, ReqGetChartLotery, ReqHistoryOrder } from "@interface/winGo"
 import { callFailed, callSuccess } from "@method/requestResult"
 import axiosInstance from "./axios"
 
@@ -14,6 +14,15 @@ export const orderAov = async (data: Order) => {
 export const getAovLotery = async (data: ReqGetChartLotery) => {
     try {
         const res = await axiosInstance.post('/api/lotery/getAovLotery', data)
+        return callSuccess(res)
+    } catch (error) {
+        return callFailed()
+    }
+}
+
+export const historyOrderAov = async (data: ReqHistoryOrder) => {
+    try {
+        const res = await axiosInstance.post('/api/lotery/historyOrderAov', data)
         return callSuccess(res)
     } catch (error) {
         return callFailed()

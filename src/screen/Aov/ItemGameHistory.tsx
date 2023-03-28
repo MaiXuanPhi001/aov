@@ -8,7 +8,7 @@ import { converNumberToImages } from './data'
 type History = {
     id: number,
     number: number,
-    type: string,
+    type: number,
     color: string[],
 }
 
@@ -37,7 +37,7 @@ const ItemGameHistory = ({ history }: { history: History }) => {
 
             <Box width={'30%'} alignCenter>
                 <Img
-                    source={require('@images/aov/ad2.png')}
+                    source={history.type === 1 ? require('@images/aov/sp2.png') : require('@images/aov/ad2.png')}
                     width={IMG}
                     height={IMG}
                 />

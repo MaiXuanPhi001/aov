@@ -7,6 +7,7 @@ import Img from '@commom/Img'
 import { DataHistoryOrder } from '@interface/winGo'
 import { Platform } from 'react-native'
 import { bet, leftColor, rightColor } from './method'
+import { numberWithCommas } from '@method/format'
 
 type Props = {
     item: DataHistoryOrder,
@@ -24,20 +25,13 @@ const ItemHistoryPlaceABet = ({ item, onShowModalDetail }: Props) => {
             borderColor={theme.colors.gray3}
             row
         >
-            <Box
-                width={'34%'}
-                alignCenter
-            >
+            <Box width={'34%'} alignCenter>
                 <Txt bold>{item?.idChartLottery}</Txt>
                 <Txt marginVertical={5}>{item?.created_at?.split(' ').slice(0, -1).join(' ')}</Txt>
                 <Txt>{item?.created_at?.split(' ').slice(-1).join(' ')}</Txt>
             </Box>
 
-            <Box
-                width={'24%'}
-                justifyCenter
-                alignCenter
-            >
+            <Box width={'24%'} justifyCenter alignCenter>
                 <Box
                     width={35}
                     height={35}
@@ -72,11 +66,7 @@ const ItemHistoryPlaceABet = ({ item, onShowModalDetail }: Props) => {
                 </Box>
             </Box>
 
-            <Box
-                width={'27%'}
-                justifyCenter
-                alignCenter
-            >
+            <Box width={'27%'} justifyCenter alignCenter>
                 {item.status === 'PENDING' ?
                     <Txt bold>PENDING</Txt> :
                     <>
@@ -87,20 +77,14 @@ const ItemHistoryPlaceABet = ({ item, onShowModalDetail }: Props) => {
                             {item.profit === 0 ? 'THUA' : 'THẮNG'}
                         </Txt>
                         <Txt color={item.profit === 0 ? 'red' : '#008001'}>
-                            {item.profit === 0 ? `-${item.amount * item.balance}` : `+${item.profit}`}
+                            {item.profit === 0 ? `-${numberWithCommas(item.amount * item.balance)}` : `+${numberWithCommas(item.profit)}`}
                         </Txt>
                     </>
                 }
             </Box>
 
-            <Box
-                width={'15%'}
-                alignCenter
-                justifyCenter
-            >
-                <Btn
-                    onPress={() => onShowModalDetail(item)}
-                >
+            <Box width={'15%'} alignCenter justifyCenter>
+                <Btn onPress={() => onShowModalDetail(item)}>
                     <Img
                         source={require('@images/wingo/right-arrow.png')}
                         width={20}
