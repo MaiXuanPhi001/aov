@@ -54,7 +54,7 @@ const PlaceABetBottomSheet = ({ bottomSheetRef, onOrder }: any) => {
             <Pressable onPress={() => Keyboard.dismiss()}>
                 <Box style={styles.container}>
                     <Box style={styles.characterContainer}>
-                        <Img 
+                        <Img
                             source={image}
                             width={45}
                             height={45}
@@ -148,7 +148,15 @@ const PlaceABetBottomSheet = ({ bottomSheetRef, onOrder }: any) => {
                     >
                         {loading ?
                             <LoadingWhite /> :
-                            <Txt bold color={'white'}>Đặt cược {numberWithCommas(amount * multiplication)} đ</Txt>
+                            <>
+                                <Txt bold color={'white'}>Đặt cược {numberWithCommas(amount * multiplication)}</Txt>
+                                <Img 
+                                    source={require('@images/aov/quanhuy.png')}
+                                    width={20}
+                                    height={20}
+                                    marginLeft={10}
+                                />
+                            </>
                         }
                     </Btn>
                 </Box>
@@ -170,6 +178,7 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     buttonOrder: {
+        flexDirection: 'row',
         height: 40,
         paddingHorizontal: 20,
         borderRadius: 20,

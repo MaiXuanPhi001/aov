@@ -23,7 +23,7 @@ const Form = () => {
 
     const navigation = useNavigation<any>()
 
-    const [email, setEmail] = useState<string>('test@gmail.com')
+    const [email, setEmail] = useState<string>('pxuan932@gmail.com')
     const [password, setPassword] = useState<string>('123123')
     const [security, setSecurity] = useState<boolean>(true)
     const [checkForm, setCheckForm] = useState<boolean>(false)

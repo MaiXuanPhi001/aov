@@ -7,7 +7,7 @@ import contants from "@util/contants";
 export const loginThunk = createAsyncThunk('user/login', async (data: Login) => {
     const res = await login(data)
     if (!res.error && res.status) {
-        console.log(res.data.token)
+        // console.log(res.data.token)
         await AsyncStorage.setItem(contants.TOKEN, res.data.token)
         const response = await getProfile()
         return response
